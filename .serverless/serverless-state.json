@@ -1,0 +1,1242 @@
+{
+  "service": {
+    "service": "python-serverless-miles",
+    "serviceObject": {
+      "name": "python-serverless-miles"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "python3.12",
+      "role": "arn:aws:iam::272898481162:role/serverless-app-role",
+      "stage": "dev",
+      "environment": {
+        "DB_NAME": "products-miles",
+        "SQS_QUEUE_NAME": "python-miles-queue",
+        "SQS_BUCKET_NAME": "miles-product-bucket",
+        "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+        "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+        "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+      },
+      "region": "us-east-2",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "HelloLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-hello"
+            }
+          },
+          "GetUnderscoreallUnderscoreproductsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-get_all_products"
+            }
+          },
+          "PostUnderscoreproductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-post_product"
+            }
+          },
+          "ProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-product"
+            }
+          },
+          "BatchCreateProductsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-batchCreateProducts"
+            }
+          },
+          "BatchDeleteProductsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-batchDeleteProducts"
+            }
+          },
+          "ReceiveMessagesFromSqsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-receiveMessagesFromSqs"
+            }
+          },
+          "HelloLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.hello",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-hello",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "HelloLogGroup"
+            ]
+          },
+          "GetUnderscoreallUnderscoreproductsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.get_all_products",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-get_all_products",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "GetUnderscoreallUnderscoreproductsLogGroup"
+            ]
+          },
+          "PostUnderscoreproductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.post_product",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-post_product",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "PostUnderscoreproductLogGroup"
+            ]
+          },
+          "ProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.product_handler",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-product",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "ProductLogGroup"
+            ]
+          },
+          "BatchCreateProductsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.batch_create_products",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-batchCreateProducts",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "BatchCreateProductsLogGroup"
+            ]
+          },
+          "BatchDeleteProductsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.batch_delete_products",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-batchDeleteProducts",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "BatchDeleteProductsLogGroup"
+            ]
+          },
+          "ReceiveMessagesFromSqsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_handler.receive_message_from_sqs",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-receiveMessagesFromSqs",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "ReceiveMessagesFromSqsLogGroup"
+            ]
+          },
+          "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HelloLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetUnderscoreallUnderscoreproductsLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "PostUnderscoreproductLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ProductLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "BatchCreateProductsLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "BatchDeleteProductsLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ReceiveMessagesFromSqsLambdaFunction"
+              },
+              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+            }
+          },
+          "BatchCreateProductsCustomS31": {
+            "Type": "Custom::S3",
+            "Version": "1.0",
+            "DependsOn": [
+              "BatchCreateProductsLambdaFunction",
+              "CustomDashresourceDashexistingDashs3LambdaFunction"
+            ],
+            "Properties": {
+              "ServiceToken": {
+                "Fn::GetAtt": [
+                  "CustomDashresourceDashexistingDashs3LambdaFunction",
+                  "Arn"
+                ]
+              },
+              "FunctionName": "python-serverless-miles-dev-batchCreateProducts",
+              "BucketName": "miles-product-bucket",
+              "BucketConfigs": [
+                {
+                  "Event": "s3:ObjectCreated:*",
+                  "Rules": [
+                    {
+                      "Prefix": "for_create/"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "BatchDeleteProductsCustomS31": {
+            "Type": "Custom::S3",
+            "Version": "1.0",
+            "DependsOn": [
+              "BatchDeleteProductsLambdaFunction",
+              "CustomDashresourceDashexistingDashs3LambdaFunction",
+              "BatchCreateProductsCustomS31"
+            ],
+            "Properties": {
+              "ServiceToken": {
+                "Fn::GetAtt": [
+                  "CustomDashresourceDashexistingDashs3LambdaFunction",
+                  "Arn"
+                ]
+              },
+              "FunctionName": "python-serverless-miles-dev-batchDeleteProducts",
+              "BucketName": "miles-product-bucket",
+              "BucketConfigs": [
+                {
+                  "Event": "s3:ObjectCreated:*",
+                  "Rules": [
+                    {
+                      "Prefix": "for_delete/"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "IamRoleCustomResourcesLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "python-serverless-miles",
+                        "custom-resources-lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup",
+                          "logs:TagResource"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/python-serverless-miles-dev*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/python-serverless-miles-dev*:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "s3",
+                              "",
+                              "",
+                              "miles-product-bucket"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "s3:PutBucketNotification",
+                          "s3:GetBucketNotification"
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "s3",
+                              "",
+                              "",
+                              "miles-product-bucket"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "s3:PutBucketNotification",
+                          "s3:GetBucketNotification"
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "lambda",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              "function",
+                              "*"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "lambda:AddPermission",
+                          "lambda:RemovePermission"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "CustomDashresourceDashexistingDashs3LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/custom-resources.zip"
+              },
+              "FunctionName": "python-serverless-miles-dev-custom-resource-existing-s3",
+              "Handler": "s3/handler.handler",
+              "MemorySize": 1024,
+              "Runtime": "nodejs20.x",
+              "Timeout": 180,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleCustomResourcesLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "IamRoleCustomResourcesLambdaExecution",
+              "CustomDashresourceDashexistingDashs3LogGroup"
+            ]
+          },
+          "CustomDashresourceDashexistingDashs3LogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-custom-resource-existing-s3"
+            }
+          },
+          "ReceiveMessagesFromSqsEventSourceMappingSQSPythonmilesqueue": {
+            "Type": "AWS::Lambda::EventSourceMapping",
+            "DependsOn": [],
+            "Properties": {
+              "BatchSize": 10,
+              "EventSourceArn": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue",
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ReceiveMessagesFromSqsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Enabled": true
+            }
+          },
+          "HttpApi": {
+            "Type": "AWS::ApiGatewayV2::Api",
+            "Properties": {
+              "Name": "dev-python-serverless-miles",
+              "ProtocolType": "HTTP"
+            }
+          },
+          "HttpApiStage": {
+            "Type": "AWS::ApiGatewayV2::Stage",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "StageName": "$default",
+              "AutoDeploy": true,
+              "DefaultRouteSettings": {
+                "DetailedMetricsEnabled": false
+              }
+            }
+          },
+          "HelloLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HelloLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationHello": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"HelloLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGet": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationHello"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationHello"
+          },
+          "GetUnderscoreallUnderscoreproductsLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetUnderscoreallUnderscoreproductsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetUnderscoreallUnderscoreproducts": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetUnderscoreallUnderscoreproductsLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetGetproducts": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /get_products",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetUnderscoreallUnderscoreproducts"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetUnderscoreallUnderscoreproducts"
+          },
+          "PostUnderscoreproductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "PostUnderscoreproductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationPostUnderscoreproduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PostUnderscoreproductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostPostproduct": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /post_product",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationPostUnderscoreproduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationPostUnderscoreproduct"
+          },
+          "ProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetProductProductidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /product/{product_id}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationProduct"
+          },
+          "HttpApiRoutePutProductProductidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /product/{product_id}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationProduct"
+          },
+          "HttpApiRouteDeleteProductProductidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /product/{product_id}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationProduct"
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "HelloLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-HelloLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn"
+            }
+          },
+          "PostUnderscoreproductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-PostUnderscoreproductLambdaFunctionQualifiedArn"
+            }
+          },
+          "ProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-ProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "BatchCreateProductsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-BatchCreateProductsLambdaFunctionQualifiedArn"
+            }
+          },
+          "BatchDeleteProductsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-BatchDeleteProductsLambdaFunctionQualifiedArn"
+            }
+          },
+          "ReceiveMessagesFromSqsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-ReceiveMessagesFromSqsLambdaFunctionQualifiedArn"
+            }
+          },
+          "HttpApiId": {
+            "Description": "Id of the HTTP API",
+            "Value": {
+              "Ref": "HttpApi"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-HttpApiId"
+            }
+          },
+          "HttpApiUrl": {
+            "Description": "URL of the HTTP API",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "HttpApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  }
+                ]
+              ]
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-HttpApiUrl"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "custom": {
+      "prune": {
+        "automatic": true,
+        "includeLayers": true,
+        "number": 1
+      }
+    },
+    "plugins": [
+      "serverless-dotenv-plugin",
+      "serverless-offline",
+      "serverless-prune-plugin"
+    ],
+    "pluginsData": {},
+    "functions": {
+      "hello": {
+        "handler": "handlers.hello",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/",
+              "method": "get"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/"
+          }
+        ],
+        "name": "python-serverless-miles-dev-hello",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8"
+      },
+      "get_all_products": {
+        "handler": "handlers.product_handler.get_all_products",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/get_products",
+              "method": "get"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/get_products"
+          }
+        ],
+        "name": "python-serverless-miles-dev-get_all_products",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0"
+      },
+      "post_product": {
+        "handler": "handlers.product_handler.post_product",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/post_product",
+              "method": "post"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/post_product"
+          }
+        ],
+        "name": "python-serverless-miles-dev-post_product",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8"
+      },
+      "product": {
+        "handler": "handlers.product_handler.product_handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/product/{product_id}",
+              "method": "get"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/product/{product_id}"
+          },
+          {
+            "httpApi": {
+              "path": "/product/{product_id}",
+              "method": "put"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/product/{product_id}"
+          },
+          {
+            "httpApi": {
+              "path": "/product/{product_id}",
+              "method": "delete"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/product/{product_id}"
+          }
+        ],
+        "name": "python-serverless-miles-dev-product",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo"
+      },
+      "batchCreateProducts": {
+        "handler": "handlers.product_handler.batch_create_products",
+        "events": [
+          {
+            "s3": {
+              "bucket": "miles-product-bucket",
+              "event": "s3:ObjectCreated:*",
+              "existing": true,
+              "rules": [
+                {
+                  "prefix": "for_create/"
+                }
+              ]
+            }
+          }
+        ],
+        "name": "python-serverless-miles-dev-batchCreateProducts",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE"
+      },
+      "batchDeleteProducts": {
+        "handler": "handlers.product_handler.batch_delete_products",
+        "events": [
+          {
+            "s3": {
+              "bucket": "miles-product-bucket",
+              "event": "s3:ObjectCreated:*",
+              "existing": true,
+              "rules": [
+                {
+                  "prefix": "for_delete/"
+                }
+              ]
+            }
+          }
+        ],
+        "name": "python-serverless-miles-dev-batchDeleteProducts",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A"
+      },
+      "receiveMessagesFromSqs": {
+        "handler": "handlers.product_handler.receive_message_from_sqs",
+        "events": [
+          {
+            "sqs": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+          }
+        ],
+        "name": "python-serverless-miles-dev-receiveMessagesFromSqs",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ"
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless",
+    "initialServerlessConfig": {
+      "org": "brownginger12",
+      "service": "python-serverless-miles",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
+      "package": {
+        "exclude": [
+          "venv/**",
+          "node_modules/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/python-serverless-miles/dev/code-artifacts",
+        "deploymentBucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+        "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip",
+        "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      }
+    },
+    "appId": null,
+    "org": "brownginger12",
+    "orgId": null,
+    "layers": {},
+    "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z",
+    "artifact": "python-serverless-miles.zip"
+  }
+}

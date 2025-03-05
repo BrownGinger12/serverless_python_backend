@@ -1,0 +1,87 @@
+# "org" ensures this Service is used with the correct Serverless Framework License Key.
+org: brownginger12
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: python-serverless-miles
+
+provider:
+  name: aws
+  runtime: python3.12
+  role: ${env:IAM_ROLE_ARN}
+  stage: ${opt:stage, 'dev'}
+  environment:
+    DB_NAME: ${env:DB_NAME}
+    SQS_QUEUE_NAME: ${env:SQS_QUEUE_NAME}
+    SQS_BUCKET_NAME: ${env:SQS_BUCKET_NAME}
+    PRODUCT_BUCKET_NAME: ${env:PRODUCT_BUCKET_NAME}
+    
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true       
+    includeLayers: true   
+    number: 1  
+
+package:
+  exclude:
+    - venv/**
+    - node_modules/**
+
+functions:
+  hello:
+    handler: handlers.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  get_all_products:
+    handler: handlers.product_handler.get_all_products
+    events:
+      - httpApi:
+          path: /get_products
+          method: get
+  post_product:
+    handler: handlers.product_handler.post_product
+    events:
+      - httpApi:
+          path: /post_product
+          method: post
+  product:
+    handler: handlers.product_handler.product_handler
+    events:
+      - httpApi:
+          path: /product/{product_id}
+          method: get
+      - httpApi:
+          path: /product/{product_id}
+          method: put
+      - httpApi:
+          path: /product/{product_id}
+          method: delete
+
+  batchCreateProducts:
+    handler: handlers.product_handler.batch_create_products
+    events:
+      - s3:
+          bucket: miles-product-bucket
+          event: s3:ObjectCreated:*
+          existing: true
+          rules:
+            - prefix: for_create/
+  
+  batchDeleteProducts:
+    handler: handlers.product_handler.batch_delete_products
+    events:
+      - s3:
+          bucket: miles-product-bucket
+          event: s3:ObjectCreated:*
+          existing: true
+          rules:
+            - prefix: for_delete/
+  receiveMessagesFromSqs:
+    handler: handlers.product_handler.receive_message_from_sqs
+    events:
+      - sqs: ${env:SQS_QUEUE_ARN}

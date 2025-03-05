@@ -1,0 +1,1 @@
+from .dynamodb_gateway import DynamoDB
