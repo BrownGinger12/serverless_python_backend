@@ -10,14 +10,19 @@ class DynamoDB:
         """Checks if an item exists in the table."""
         try:
             response = self.table.get_item(Key=key)
-            return "Item" in response and response["Item"] is not None  # ✅ Ensures non-empty item
+            return response.get("Item")
         except Exception as e:
             return {"statusCode": 500, "message": str(e)}
 
     def put_item(self, item):
         """Inserts a new item only if it does not already exist."""
         key = {"product_id": item["product_id"]}
+        
+        if "datetime" in item:  
+            key["datetime"] = item["datetime"]
+    
         if self.item_exists(key):
+            print(self.item_exists(key))
             return {"statusCode": 400, "message": "Item already exists"}
         
         try:
