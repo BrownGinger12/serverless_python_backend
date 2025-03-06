@@ -17,6 +17,18 @@
         "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
         "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
       },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "xray:PutTraceSegments",
+            "xray:PutTelemetryRecords"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ],
       "region": "us-east-2",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -70,7 +82,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.hello",
               "Runtime": "python3.12",
@@ -98,7 +110,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.get_all_products",
               "Runtime": "python3.12",
@@ -126,7 +138,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.post_product",
               "Runtime": "python3.12",
@@ -154,7 +166,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.product_handler",
               "Runtime": "python3.12",
@@ -182,7 +194,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.batch_create_products",
               "Runtime": "python3.12",
@@ -210,7 +222,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.batch_delete_products",
               "Runtime": "python3.12",
@@ -238,7 +250,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.receive_message_from_sqs",
               "Runtime": "python3.12",
@@ -261,74 +273,74 @@
               "ReceiveMessagesFromSqsLogGroup"
             ]
           },
-          "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8": {
+          "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0": {
+          "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUnderscoreallUnderscoreproductsLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8": {
+          "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostUnderscoreproductLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo": {
+          "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProductLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE": {
+          "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "BatchCreateProductsLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A": {
+          "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "BatchDeleteProductsLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
-          "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ": {
+          "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ReceiveMessagesFromSqsLambdaFunction"
               },
-              "CodeSha256": "0nUXRygDFtI/mc2GXD9GaeiyWeA29ytRYGMZ+Gj/dns="
+              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
             }
           },
           "BatchCreateProductsCustomS31": {
@@ -528,7 +540,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z/custom-resources.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/custom-resources.zip"
               },
               "FunctionName": "python-serverless-miles-dev-custom-resource-existing-s3",
               "Handler": "s3/handler.handler",
@@ -929,7 +941,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8"
+              "Ref": "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-HelloLambdaFunctionQualifiedArn"
@@ -938,7 +950,7 @@
           "GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0"
+              "Ref": "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn"
@@ -947,7 +959,7 @@
           "PostUnderscoreproductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8"
+              "Ref": "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-PostUnderscoreproductLambdaFunctionQualifiedArn"
@@ -956,7 +968,7 @@
           "ProductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo"
+              "Ref": "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-ProductLambdaFunctionQualifiedArn"
@@ -965,7 +977,7 @@
           "BatchCreateProductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE"
+              "Ref": "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-BatchCreateProductsLambdaFunctionQualifiedArn"
@@ -974,7 +986,7 @@
           "BatchDeleteProductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A"
+              "Ref": "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-BatchDeleteProductsLambdaFunctionQualifiedArn"
@@ -983,7 +995,7 @@
           "ReceiveMessagesFromSqsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ"
+              "Ref": "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-ReceiveMessagesFromSqsLambdaFunctionQualifiedArn"
@@ -1059,7 +1071,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionihQAzheQxK6DOqJ7NJAOWKypUkKAZC3QtAseawLNJL8"
+        "versionLogicalId": "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ"
       },
       "get_all_products": {
         "handler": "handlers.product_handler.get_all_products",
@@ -1079,7 +1091,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "GetUnderscoreallUnderscoreproductsLambdaVersionUaRMH449Zru9eiw8Db12Xiu2qOLV8dRsOU5OuWfOq0"
+        "versionLogicalId": "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw"
       },
       "post_product": {
         "handler": "handlers.product_handler.post_product",
@@ -1099,7 +1111,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "PostUnderscoreproductLambdaVersionm9q5nr5O3I2iV2vgk9lmcZhA8Cu2ZopWtApxEAnM8"
+        "versionLogicalId": "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98"
       },
       "product": {
         "handler": "handlers.product_handler.product_handler",
@@ -1135,7 +1147,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "ProductLambdaVersionWNe8LJ9b0xoNUaxMOxuvUMuVS1wNbjkbI7OLWwuo"
+        "versionLogicalId": "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg"
       },
       "batchCreateProducts": {
         "handler": "handlers.product_handler.batch_create_products",
@@ -1159,7 +1171,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "BatchCreateProductsLambdaVersionPbA3GikCBlKcdaDlpm4YB9E0NcZu68OX9sXLnONlE"
+        "versionLogicalId": "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI"
       },
       "batchDeleteProducts": {
         "handler": "handlers.product_handler.batch_delete_products",
@@ -1183,7 +1195,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "BatchDeleteProductsLambdaVersion7ITvZCAt8i5iE3wOklXRt1rcTcKvHz728HhqxpGf6A"
+        "versionLogicalId": "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE"
       },
       "receiveMessagesFromSqs": {
         "handler": "handlers.product_handler.receive_message_from_sqs",
@@ -1198,7 +1210,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "ReceiveMessagesFromSqsLambdaVersionK7Kj9zgmVVl9i9X5dzGF1zuoxnEDzykXyHLJrVeDQ"
+        "versionLogicalId": "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw"
       }
     },
     "configValidationMode": "warn",
@@ -1223,7 +1235,7 @@
         "artifactsS3KeyDirname": "serverless/python-serverless-miles/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
         "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip",
-        "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z"
+        "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -1236,7 +1248,7 @@
     "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741161120153-2025-03-05T07:52:00.153Z",
+    "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z",
     "artifact": "python-serverless-miles.zip"
   }
 }

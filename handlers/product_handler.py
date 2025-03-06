@@ -8,7 +8,7 @@ from models.product import Product
 from gateways.dynamodb_gateway import DynamoDB
 from gateways.s3_gateway import S3Gateway
 from gateways.sqs_gateway import SQSGateway
-from helper.helper_func import build_update_expression, validate_update_product, DecimalEncoder, generate_code
+from helper.helper_func import DecimalEncoder, generate_code
 import os
 
 #gateway initialization
@@ -51,7 +51,6 @@ def get_all_products(event, context):
     
 
 def post_product(event, context):
-    """Handles posting a new product to DynamoDB and sending a message to SQS."""
     try:
         body = json.loads(event["body"], parse_float=Decimal)
         
@@ -63,34 +62,31 @@ def post_product(event, context):
             brand_name=body.get("brand_name", "")
         )
         
-        response = db_handler.put_item(product.get_data())
+        response = product.create()
         
         if response["statusCode"] != 200:
-            return {response}
-        
-        print("Notice: Product added successfully!")
+            return {
+                "body": response
+            }
         
         sqs_client.send_message(json.dumps(body, cls=DecimalEncoder))
         
         return {
-            "statusCode": 200,
-            "message": "Product added successfully",
-            "body": json.dumps(body, cls=DecimalEncoder)
+            "body": response,
+            "data": json.dumps(body, cls=DecimalEncoder)
         }
+        
 
     except Exception as e:
         return {"statusCode": 500, "body": json.dumps({"message": str(e)})}
         
 def get_product(product_id):
     try:
-        response = db_handler.get_item({"product_id": product_id})
-        
-        if response["statusCode"] != 200:
-            return response
+        product = Product(product_id=product_id)
+        response = product.get()
         
         return {
-            "statusCode": 200,
-            "body": json.dumps(response, cls=DecimalEncoder)
+            "body": response
         }
         
     except Exception as e:
@@ -98,14 +94,11 @@ def get_product(product_id):
         
 def delete_product(product_id):
     try:
-        response = db_handler.delete_item({"product_id": product_id})
-        
-        if response["statusCode"] != 200:
-            return response
+        product = Product(product_id=product_id)
+        response = product.delete()
         
         return {
-            "statusCode": 200,
-            "body": json.dumps(response, cls=DecimalEncoder)
+            "body": response
         }
         
     except Exception as e:
@@ -113,29 +106,14 @@ def delete_product(product_id):
 
 def update_product(product_id, body):
     try:
-        validate_update_product(product_id, body)
+        product = Product(product_id=product_id)
         
-        expression_to_update, expression_val = build_update_expression(body)
+        response = product.update(body)
         
-        if expression_to_update:
-            expression_to_update = "SET " + ", ".join(expression_to_update)
-            
-            try:
-                response = db_handler.update_item({"product_id": product_id}, expression_to_update, expression_val)
-            
-                if response["statusCode"] != 200:
-                    return response
-                
-                return {
-                    "statusCode": 200,
-                    "body": json.dumps(response, cls=DecimalEncoder)
-                }
-            
-            except Exception as e:
-                return {"statusCode": 500, "message": str(e)}
+        return {
+            "body": response
+        }
         
-        return {"statusCode": 400, "body": json.dumps({"message": "No valid fields to update"})}
-    
     except ValueError as e:
         return {"statusCode": 500, "body": json.dumps({"message": str(e)})}
 
@@ -159,10 +137,8 @@ def batch_create_products(event, context):
                     quantity=int(row['quantity']),
                     brand_name=row.get("brand_name", "")
                 )
-                db_handler.put_item(
-                   item=product.get_data()
-                )
-                print("Notice: products from the csv file successfully added to the products table")
+                product.create()
+        print("Notice: products from the csv file successfully added to the products table")
     except ValueError as e:
         print(f"Error: {e}")
 
@@ -179,8 +155,9 @@ def batch_delete_products(event, context):
         with open(localFilename, 'r') as f:
             csv_reader = csv.DictReader(f)
             for row in csv_reader:
-                db_handler.delete_item({"product_id": row['product_id']})
-                print("Notice: products from the csv file successfully deleted")
+                product = Product(product_id=row['product_id'])
+                product.delete()
+        print("Notice: products from the csv file successfully deleted")
     except ValueError as e:
         print(f"Error: {e}")
 

@@ -13,6 +13,13 @@ provider:
     SQS_QUEUE_NAME: ${env:SQS_QUEUE_NAME}
     SQS_BUCKET_NAME: ${env:SQS_BUCKET_NAME}
     PRODUCT_BUCKET_NAME: ${env:PRODUCT_BUCKET_NAME}
+  iamRoleStatements:
+    - Effect: "Allow" # xray permissions (required)
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
     
 plugins:
   - serverless-dotenv-plugin
