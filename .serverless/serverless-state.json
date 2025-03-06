@@ -14,6 +14,7 @@
         "SQS_QUEUE_NAME": "python-miles-queue",
         "SQS_BUCKET_NAME": "miles-product-bucket",
         "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+        "DB_INVENTORY_NAME": "miles-product-inventory",
         "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
         "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
       },
@@ -77,12 +78,18 @@
               "LogGroupName": "/aws/lambda/python-serverless-miles-dev-receiveMessagesFromSqs"
             }
           },
+          "AddProductInvLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/python-serverless-miles-dev-addProductInv"
+            }
+          },
           "HelloLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.hello",
               "Runtime": "python3.12",
@@ -95,6 +102,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -110,7 +118,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.get_all_products",
               "Runtime": "python3.12",
@@ -123,6 +131,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -138,7 +147,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.post_product",
               "Runtime": "python3.12",
@@ -151,6 +160,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -166,7 +176,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.product_handler",
               "Runtime": "python3.12",
@@ -179,6 +189,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -194,7 +205,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.batch_create_products",
               "Runtime": "python3.12",
@@ -207,6 +218,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -222,7 +234,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.batch_delete_products",
               "Runtime": "python3.12",
@@ -235,6 +247,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -250,7 +263,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/python-serverless-miles.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
               },
               "Handler": "handlers.product_handler.receive_message_from_sqs",
               "Runtime": "python3.12",
@@ -263,6 +276,7 @@
                   "SQS_QUEUE_NAME": "python-miles-queue",
                   "SQS_BUCKET_NAME": "miles-product-bucket",
                   "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
                   "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
                   "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
                 }
@@ -273,74 +287,113 @@
               "ReceiveMessagesFromSqsLogGroup"
             ]
           },
-          "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ": {
+          "AddProductInvLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/python-serverless-miles.zip"
+              },
+              "Handler": "handlers.product_inv_handler.post_product_inv",
+              "Runtime": "python3.12",
+              "FunctionName": "python-serverless-miles-dev-addProductInv",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_NAME": "products-miles",
+                  "SQS_QUEUE_NAME": "python-miles-queue",
+                  "SQS_BUCKET_NAME": "miles-product-bucket",
+                  "PRODUCT_BUCKET_NAME": "miles-queue-bucket",
+                  "DB_INVENTORY_NAME": "miles-product-inventory",
+                  "IAM_ROLE_ARN": "arn:aws:iam::272898481162:role/serverless-app-role",
+                  "SQS_QUEUE_ARN": "arn:aws:sqs:us-east-2:272898481162:python-miles-queue"
+                }
+              },
+              "Role": "arn:aws:iam::272898481162:role/serverless-app-role"
+            },
+            "DependsOn": [
+              "AddProductInvLogGroup"
+            ]
+          },
+          "HelloLambdaVersionkWRhI0nrj08N98IrVhycwi0WwvT5pXeq34sHcX0Qs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw": {
+          "GetUnderscoreallUnderscoreproductsLambdaVersionjbo9Zx0rRlhykKcvrumXH982GeXrTOj0yie3WjGcYc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUnderscoreallUnderscoreproductsLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98": {
+          "PostUnderscoreproductLambdaVersionTowr5JLUA0e0PyaP6iqaDjg99clQVktx0vW8dxjIITM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostUnderscoreproductLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg": {
+          "ProductLambdaVersionJZydHWcvwCEzPA13rU8BnzqQA9CYx1qSl5wG22h6vs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProductLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI": {
+          "BatchCreateProductsLambdaVersionLiiCEV9cFNVcy9fj7JQXljvtUerMp0XR1LRhiPQ88": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "BatchCreateProductsLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE": {
+          "BatchDeleteProductsLambdaVersionHFLOhLcWaP2GSt55tSu0KJocIla6dE1PfEjmBdNk0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "BatchDeleteProductsLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
-          "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw": {
+          "ReceiveMessagesFromSqsLambdaVersiondfc7fmBqJSSOAPuCTwJDDvNWLGSuQyYbAdzso5FtNI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ReceiveMessagesFromSqsLambdaFunction"
               },
-              "CodeSha256": "w733XVQOdIs89rWkxdOZw/xDc1Vi7WAd7f5ZkDVqG1E="
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
+            }
+          },
+          "AddProductInvLambdaVersionvaibjcOtucE9zOgN3AfqgVzaU8rbKwLVaG8c6mQQDd4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AddProductInvLambdaFunction"
+              },
+              "CodeSha256": "tZI4KrC6pK/wU/9b/eBPRF4vQPcvZ+hHcre5kpwU2YE="
             }
           },
           "BatchCreateProductsCustomS31": {
@@ -540,7 +593,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
-                "S3Key": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z/custom-resources.zip"
+                "S3Key": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z/custom-resources.zip"
               },
               "FunctionName": "python-serverless-miles-dev-custom-resource-existing-s3",
               "Handler": "s3/handler.handler",
@@ -563,6 +616,71 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/python-serverless-miles-dev-custom-resource-existing-s3"
+            }
+          },
+          "PythonserverlessmilesdevaddProductInvrule1EventBridgeRule": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+              "EventBusName": "products-event-bus",
+              "EventPattern": {
+                "source": [
+                  "post_product_event"
+                ],
+                "detail-type": [
+                  "product_added"
+                ]
+              },
+              "Name": "python-serverless-miles-dev-addProductInv-rule-1",
+              "State": "ENABLED",
+              "Targets": [
+                {
+                  "Arn": {
+                    "Fn::GetAtt": [
+                      "AddProductInvLambdaFunction",
+                      "Arn"
+                    ]
+                  },
+                  "Id": "python-serverless-miles-dev-addProductInv-rule-1-target"
+                }
+              ]
+            }
+          },
+          "AddProductInvEventBridgeLambdaPermission1": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "Action": "lambda:InvokeFunction",
+              "FunctionName": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PythonserverlessmilesdevaddProductInvrule1EventBridgeRule\"][\"Properties\"][\"Targets\"][0][\"Arn\"]"
+              },
+              "Principal": "events.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  ":",
+                  [
+                    "arn",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    "events",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    {
+                      "Fn::Join": [
+                        "/",
+                        [
+                          "rule",
+                          "products-event-bus",
+                          "python-serverless-miles-dev-addProductInv-rule-1"
+                        ]
+                      ]
+                    }
+                  ]
+                ]
+              }
             }
           },
           "ReceiveMessagesFromSqsEventSourceMappingSQSPythonmilesqueue": {
@@ -941,7 +1059,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ"
+              "Ref": "HelloLambdaVersionkWRhI0nrj08N98IrVhycwi0WwvT5pXeq34sHcX0Qs"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-HelloLambdaFunctionQualifiedArn"
@@ -950,7 +1068,7 @@
           "GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw"
+              "Ref": "GetUnderscoreallUnderscoreproductsLambdaVersionjbo9Zx0rRlhykKcvrumXH982GeXrTOj0yie3WjGcYc"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-GetUnderscoreallUnderscoreproductsLambdaFunctionQualifiedArn"
@@ -959,7 +1077,7 @@
           "PostUnderscoreproductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98"
+              "Ref": "PostUnderscoreproductLambdaVersionTowr5JLUA0e0PyaP6iqaDjg99clQVktx0vW8dxjIITM"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-PostUnderscoreproductLambdaFunctionQualifiedArn"
@@ -968,7 +1086,7 @@
           "ProductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg"
+              "Ref": "ProductLambdaVersionJZydHWcvwCEzPA13rU8BnzqQA9CYx1qSl5wG22h6vs"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-ProductLambdaFunctionQualifiedArn"
@@ -977,7 +1095,7 @@
           "BatchCreateProductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI"
+              "Ref": "BatchCreateProductsLambdaVersionLiiCEV9cFNVcy9fj7JQXljvtUerMp0XR1LRhiPQ88"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-BatchCreateProductsLambdaFunctionQualifiedArn"
@@ -986,7 +1104,7 @@
           "BatchDeleteProductsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE"
+              "Ref": "BatchDeleteProductsLambdaVersionHFLOhLcWaP2GSt55tSu0KJocIla6dE1PfEjmBdNk0"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-BatchDeleteProductsLambdaFunctionQualifiedArn"
@@ -995,10 +1113,19 @@
           "ReceiveMessagesFromSqsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw"
+              "Ref": "ReceiveMessagesFromSqsLambdaVersiondfc7fmBqJSSOAPuCTwJDDvNWLGSuQyYbAdzso5FtNI"
             },
             "Export": {
               "Name": "sls-python-serverless-miles-dev-ReceiveMessagesFromSqsLambdaFunctionQualifiedArn"
+            }
+          },
+          "AddProductInvLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AddProductInvLambdaVersionvaibjcOtucE9zOgN3AfqgVzaU8rbKwLVaG8c6mQQDd4"
+            },
+            "Export": {
+              "Name": "sls-python-serverless-miles-dev-AddProductInvLambdaFunctionQualifiedArn"
             }
           },
           "HttpApiId": {
@@ -1071,7 +1198,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionaheu2NntlxWvV7YEGtsVIwg1YsvhKZ793H3KdbKyQ"
+        "versionLogicalId": "HelloLambdaVersionkWRhI0nrj08N98IrVhycwi0WwvT5pXeq34sHcX0Qs"
       },
       "get_all_products": {
         "handler": "handlers.product_handler.get_all_products",
@@ -1091,7 +1218,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "GetUnderscoreallUnderscoreproductsLambdaVersionX7nvztQSaJCKoLBBK3ULD38IKdFJbC7Z6ENoAEOZw"
+        "versionLogicalId": "GetUnderscoreallUnderscoreproductsLambdaVersionjbo9Zx0rRlhykKcvrumXH982GeXrTOj0yie3WjGcYc"
       },
       "post_product": {
         "handler": "handlers.product_handler.post_product",
@@ -1111,7 +1238,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "PostUnderscoreproductLambdaVersionp3rMDwV1QvVoHGL59PWsuugbppXt44szxLhW1PQ98"
+        "versionLogicalId": "PostUnderscoreproductLambdaVersionTowr5JLUA0e0PyaP6iqaDjg99clQVktx0vW8dxjIITM"
       },
       "product": {
         "handler": "handlers.product_handler.product_handler",
@@ -1147,7 +1274,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "ProductLambdaVersionWsQtge44MnA9VtP9KuDNoARO6z85UxvSZjgBu5qPkRg"
+        "versionLogicalId": "ProductLambdaVersionJZydHWcvwCEzPA13rU8BnzqQA9CYx1qSl5wG22h6vs"
       },
       "batchCreateProducts": {
         "handler": "handlers.product_handler.batch_create_products",
@@ -1171,7 +1298,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "BatchCreateProductsLambdaVersion2ws0PBfzrmuTlnXqib8KQHJ7Ca6bvdEciIJaq6uI"
+        "versionLogicalId": "BatchCreateProductsLambdaVersionLiiCEV9cFNVcy9fj7JQXljvtUerMp0XR1LRhiPQ88"
       },
       "batchDeleteProducts": {
         "handler": "handlers.product_handler.batch_delete_products",
@@ -1195,7 +1322,7 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "BatchDeleteProductsLambdaVersionvNvcRzkR6pnW8UOHeCDboWhPuJtF7TFCVRWGPIpYZdE"
+        "versionLogicalId": "BatchDeleteProductsLambdaVersionHFLOhLcWaP2GSt55tSu0KJocIla6dE1PfEjmBdNk0"
       },
       "receiveMessagesFromSqs": {
         "handler": "handlers.product_handler.receive_message_from_sqs",
@@ -1210,7 +1337,27 @@
         "timeout": 6,
         "runtime": "python3.12",
         "vpc": {},
-        "versionLogicalId": "ReceiveMessagesFromSqsLambdaVersiondtKj4lwzKkpI0cGwrc4AxAA5GDnDClDgufAYoh59Lw"
+        "versionLogicalId": "ReceiveMessagesFromSqsLambdaVersiondfc7fmBqJSSOAPuCTwJDDvNWLGSuQyYbAdzso5FtNI"
+      },
+      "addProductInv": {
+        "handler": "handlers.product_inv_handler.post_product_inv",
+        "events": [
+          {
+            "eventBridge": {
+              "eventBus": "arn:aws:events:us-east-2:272898481162:event-bus/products-event-bus",
+              "pattern": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PythonserverlessmilesdevaddProductInvrule1EventBridgeRule\"][\"Properties\"][\"EventPattern\"]"
+              }
+            }
+          }
+        ],
+        "name": "python-serverless-miles-dev-addProductInv",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.12",
+        "vpc": {},
+        "versionLogicalId": "AddProductInvLambdaVersionvaibjcOtucE9zOgN3AfqgVzaU8rbKwLVaG8c6mQQDd4"
       }
     },
     "configValidationMode": "warn",
@@ -1235,7 +1382,7 @@
         "artifactsS3KeyDirname": "serverless/python-serverless-miles/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-us-east-2-4a2040d6-c638",
         "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip",
-        "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z"
+        "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -1248,7 +1395,7 @@
     "artifact": "/home/ec2-user/environment/python-serverless-miles/product/.serverless/python-serverless-miles.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741232009340-2025-03-06T03:33:29.340Z",
+    "artifactDirectoryName": "serverless/python-serverless-miles/dev/1741251294617-2025-03-06T08:54:54.617Z",
     "artifact": "python-serverless-miles.zip"
   }
 }

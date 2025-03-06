@@ -4,12 +4,13 @@ class DynamoDB:
     def __init__(self, table_name):
         self.dynamodb = boto3.resource("dynamodb", "us-east-2")
         self.table = self.dynamodb.Table(table_name)
-
+        
+        
     def item_exists(self, key):
         """Checks if an item exists in the table."""
         try:
             response = self.table.get_item(Key=key)
-            return "Item" in response
+            return "Item" in response and response["Item"] is not None  # ✅ Ensures non-empty item
         except Exception as e:
             return {"statusCode": 500, "message": str(e)}
 
@@ -21,7 +22,7 @@ class DynamoDB:
         
         try:
             self.table.put_item(Item=item)
-            return {"statusCode": 200, "message": "Item added successfully"}
+            return {"statusCode": 200, "message": "Item added successfully", "data": item}
         except Exception as e:
             return {"statusCode": 500, "message": str(e)}
 

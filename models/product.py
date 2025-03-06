@@ -1,7 +1,9 @@
 import decimal
 import os
+import json
 from gateways.dynamodb_gateway import DynamoDB
-from helper.helper_func import build_update_expression, validate_update_product
+from models.EventBridgeEvent import EventbridgeEvent
+from helper.helper_func import build_update_expression, validate_update_product, DecimalEncoder
 
 db_handler = DynamoDB(os.getenv("DB_NAME"))
 
@@ -60,6 +62,8 @@ class Product:
     
         if response["statusCode"] == 200:
             print("Notice: Product added successfully!")
+            event = EventbridgeEvent("product_added", json.dumps(self.get_data(), cls=DecimalEncoder))
+            event.send()
         
         return response
     

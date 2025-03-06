@@ -8,6 +8,7 @@ from models.product import Product
 from gateways.dynamodb_gateway import DynamoDB
 from gateways.s3_gateway import S3Gateway
 from gateways.sqs_gateway import SQSGateway
+from gateways.logs_gateway import CloudWatchLogger
 from helper.helper_func import DecimalEncoder, generate_code
 import os
 
@@ -16,8 +17,7 @@ db_handler = DynamoDB(os.getenv("DB_NAME"))
 product_s3 = S3Gateway(os.getenv("PRODUCT_BUCKET_NAME"))
 sqs_s3 = S3Gateway(os.getenv("SQS_BUCKET_NAME"))
 sqs_client = SQSGateway(os.getenv("SQS_QUEUE_NAME"))
-
-
+logger = CloudWatchLogger("products-created-logs", "current-logs")
 
 def product_handler(event, context):
     http_method = event["requestContext"]["http"]["method"]
@@ -70,6 +70,7 @@ def post_product(event, context):
             }
         
         sqs_client.send_message(json.dumps(body, cls=DecimalEncoder))
+        #logger.send_log({"event": "product_created", "body": json.dumps(body, cls=DecimalEncoder), "status": "Success"})
         
         return {
             "body": response,
@@ -137,6 +138,8 @@ def batch_create_products(event, context):
                     quantity=int(row['quantity']),
                     brand_name=row.get("brand_name", "")
                 )
+                #logger.send_log({"event": "product_created", "body": json.dumps(row, cls=DecimalEncoder), "status": "Success"})
+                sqs_client.send_message(json.dumps(row, cls=DecimalEncoder))
                 product.create()
         print("Notice: products from the csv file successfully added to the products table")
     except ValueError as e:

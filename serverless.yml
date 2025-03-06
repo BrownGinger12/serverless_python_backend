@@ -13,6 +13,8 @@ provider:
     SQS_QUEUE_NAME: ${env:SQS_QUEUE_NAME}
     SQS_BUCKET_NAME: ${env:SQS_BUCKET_NAME}
     PRODUCT_BUCKET_NAME: ${env:PRODUCT_BUCKET_NAME}
+    DB_INVENTORY_NAME: ${env:DB_INVENTORY_NAME}
+    
   iamRoleStatements:
     - Effect: "Allow" # xray permissions (required)
       Action:
@@ -92,3 +94,14 @@ functions:
     handler: handlers.product_handler.receive_message_from_sqs
     events:
       - sqs: ${env:SQS_QUEUE_ARN}
+  
+  addProductInv:
+    handler: handlers.product_inv_handler.post_product_inv
+    events:
+      - eventBridge:
+          eventBus: arn:aws:events:us-east-2:272898481162:event-bus/products-event-bus
+          pattern:
+            source:
+              - post_product_event
+            detail-type:
+              - product_added
